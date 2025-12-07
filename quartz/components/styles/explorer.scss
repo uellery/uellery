@@ -15,8 +15,8 @@
     .sidebar.left:has(.explorer) {
       box-sizing: border-box;
       position: sticky;
-      background-color: var(--light); /* Mobilde üst bar rengi */
-      border-bottom: 1px solid var(--lightgray); /* Mobilde ayrım çizgisi */
+      background-color: var(--light);
+      border-bottom: 1px solid var(--lightgray);
       padding: 1rem;
       margin: 0;
       z-index: 999;
@@ -34,7 +34,7 @@
   overflow-y: hidden;
   min-height: 1.2rem;
   flex: 0 1 auto;
-  font-family: var(--bodyFont); /* Okunaklı font */
+  font-family: var(--bodyFont);
 
   &.collapsed {
     flex: 0 1 1.2rem;
@@ -47,10 +47,9 @@
     margin-left: 0.5rem;
     transition: transform 0.3s ease;
     opacity: 0.8;
-    color: var(--secondary); /* Katlama oku rengi */
+    color: var(--secondary);
   }
 
-  /* Başlık Butonları (Mobile/Desktop) */
   button.mobile-explorer,
   button.desktop-explorer {
     background-color: transparent;
@@ -67,7 +66,7 @@
       font-size: 1rem;
       display: inline-block;
       margin: 0;
-      letter-spacing: 0.02em; /* Biraz daha havalı duruş */
+      letter-spacing: 0.02em;
     }
     
     &:hover {
@@ -75,7 +74,6 @@
     }
   }
 
-  /* Mobil Düzenlemeleri */
   @media all and ($mobile) {
     order: -1;
     height: initial;
@@ -108,9 +106,8 @@
   overflow: hidden;
   overflow-y: auto;
   margin-top: 0.8rem;
-  padding-bottom: 2rem; /* En altta biraz boşluk kalsın */
+  padding-bottom: 2rem;
 
-  /* Kaydırma çubuğunu inceltelim (Webkit) */
   &::-webkit-scrollbar {
     width: 4px;
   }
@@ -125,40 +122,36 @@
     padding: 0;
     overscroll-behavior: contain;
 
-    /* DOSYA LİNKLERİ (Files) */
     & li > a {
       color: var(--dark);
       opacity: 0.8;
       pointer-events: all;
       display: block;
-      padding: 6px 10px; /* Tıklama alanı genişletildi */
+      padding: 6px 10px;
       margin: 2px 0;
-      border-radius: 6px; /* Hafif yuvarlak köşeler */
+      border-radius: 6px;
       transition: all 0.2s ease;
       font-size: 0.95rem;
       text-decoration: none;
-      border-left: 2px solid transparent; /* Aktiflik çubuğu için yer ayır */
+      border-left: 2px solid transparent;
 
-      /* Hover (Üzerine Gelince) */
       &:hover {
         opacity: 1;
-        background-color: var(--lightgray); /* Arkaya hafif renk */
+        background-color: var(--lightgray);
         color: var(--dark);
-        padding-left: 14px; /* Hafif sağa kayma efekti */
+        padding-left: 14px;
       }
 
-      /* Aktif Sayfa (Şu an okunan) */
       &.active {
         opacity: 1;
         color: var(--secondary);
         font-weight: 600;
-        background-color: rgba(var(--secondary), 0.05); /* Çok hafif renkli zemin */
-        border-left: 3px solid var(--secondary); /* Sol tarafa belirteç çizgisi */
+        background-color: rgba(var(--secondary), 0.05);
+        border-left: 3px solid var(--secondary);
       }
     }
   }
 
-  /* KLASÖR YAPISI (Folders) */
   .folder-outer {
     visibility: collapse;
     display: grid;
@@ -173,12 +166,10 @@
     grid-template-rows: 1fr;
   }
 
-  /* Ağaç Çizgisi (Tree Line) - Modernize Edildi */
   .folder-outer > ul {
     overflow: hidden;
     margin-left: 10px;
     padding-left: 0.8rem;
-    /* Düz çizgi yerine kesik çizgi (Harita/Parşömen hissi) */
     border-left: 1px dashed var(--lightgray); 
   }
 }
@@ -194,7 +185,7 @@
   
   &:hover .folder-icon {
     color: var(--secondary);
-    transform: scale(1.1); /* İkon hafif büyüsün */
+    transform: scale(1.1);
   }
 
   & div > a {
@@ -234,7 +225,7 @@
     }
     
     &:hover span {
-        color: var(--tertiary); /* Klasör üstüne gelince altın rengi olsun */
+        color: var(--tertiary);
     }
   }
 }
@@ -254,4 +245,61 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
   transform: rotate(-90deg);
 }
 
-/* --- MOB
+/* --- MOBIL MENÜ ANİMASYONLARI --- */
+
+.explorer {
+  @media all and ($mobile) {
+    &.collapsed {
+      flex: 0 0 34px;
+      & > .explorer-content {
+        transform: translateX(-100vw);
+        visibility: hidden;
+      }
+    }
+
+    &:not(.collapsed) {
+      flex: 0 0 34px;
+      & > .explorer-content {
+        transform: translateX(0);
+        visibility: visible;
+      }
+    }
+
+    .explorer-content {
+      box-sizing: border-box;
+      z-index: 100;
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin-top: 0;
+      background-color: rgba(var(--light), 0.98); 
+      backdrop-filter: blur(10px);
+      max-width: 85vw;
+      width: 85vw;
+      box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+      transform: translateX(-100vw);
+      transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), visibility 200ms ease;
+      overflow: hidden;
+      overflow-y: auto;
+      padding: 4rem 1rem 2rem 1rem;
+      height: 100dvh;
+      max-height: 100dvh;
+      visibility: hidden;
+    }
+
+    .mobile-explorer {
+      margin: 0;
+      padding: 5px;
+      z-index: 101;
+      .lucide-menu {
+        stroke: var(--darkgray);
+      }
+    }
+  }
+}
+
+.mobile-no-scroll {
+  @media all and ($mobile) {
+    overscroll-behavior: none;
+  }
+}
