@@ -1,5 +1,5 @@
 ---
-title: Tarih Bahçem
+title: Kişisel Ansiklopedim
 ---
 
 # Hoş Geldiniz
