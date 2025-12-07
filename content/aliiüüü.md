@@ -1,1 +1,1 @@
-slmm ornegın su an guncellenıyor m
+slmm ornegın su an guncellenıyor emre
