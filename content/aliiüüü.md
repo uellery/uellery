@@ -1,1 +1,1 @@
-slmm ornegın su an guncellenıyor mu
+slmm ornegın su an guncellenıyor m
