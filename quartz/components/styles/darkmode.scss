@@ -1,45 +1,86 @@
+/* --- TARİH TEMASI RENK PALETİ --- */
+
+/* 1. Aydınlık Mod: Parşömen ve Mürekkep Teması */
+:root[saved-theme="light"] {
+  --light: #fdfbf7;      /* Zemin: Eski kağıt rengi */
+  --lightgray: #e3dccb;  /* Kenarlıklar: Eskimiş kenar */
+  --gray: #9c8c74;       /* Pasif yazılar: Taş rengi */
+  --darkgray: #5c4d3c;   /* İkincil yazılar: Kurumuş toprak */
+  --dark: #2b2118;       /* Ana metin: Koyu kahve mürekkep (Tam siyah değil) */
+  --secondary: #8b2e2e;  /* Vurgu Rengi: Mühür kırmızısı (Linkler vb. için) */
+  --tertiary: #cfa855;   /* Süslemeler: Altın yaldız */
+  
+  color-scheme: light;
+}
+
+/* 2. Karanlık Mod: Müze Atmosferi */
+:root[saved-theme="dark"] {
+  --light: #181512;      /* Zemin: Koyu ahşap/Zift */
+  --lightgray: #2d2620;  /* Bloklar: Koyu deri */
+  --gray: #6e645a;       
+  --darkgray: #a89f91;   
+  --dark: #e6dcc8;       /* Ana metin: Açık kemik rengi */
+  --secondary: #d4af37;  /* Vurgu: Antik altın */
+  --tertiary: #8b4513;   
+  
+  color-scheme: dark;
+}
+
+/* --- BUTON VE GEÇİŞ AYARLARI --- */
+
+body {
+  /* Renk geçişleri yumuşak olsun */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--light);
+  color: var(--dark);
+}
+
 .darkmode {
   cursor: pointer;
-  padding: 0;
+  padding: 5px; /* Tıklama alanı biraz daha rahat olsun */
   position: relative;
-  background: none;
-  border: none;
-  width: 20px;
-  height: 20px;
+  background: transparent; /* Butonun arkası şeffaf */
+  border: 1px solid transparent;
+  border-radius: 50%; /* Buton yuvarlak dursun */
+  width: 32px; /* Boyut biraz büyütüldü */
+  height: 32px;
   margin: 0;
   text-align: inherit;
   flex-shrink: 0;
+  
+  /* Butonun üzerine gelince hafif bir efekt */
+  &:hover {
+    background-color: var(--lightgray);
+    border-color: var(--gray);
+  }
 
   & svg {
     position: absolute;
     width: 20px;
     height: 20px;
-    top: calc(50% - 10px);
-    fill: var(--darkgray);
-    transition: opacity 0.1s ease;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Ortalamak için */
+    fill: var(--darkgray); /* İkon rengi temaya göre değişsin */
+    transition: all 0.3s ease;
   }
 }
 
-:root[saved-theme="dark"] {
-  color-scheme: dark;
-}
-
-:root[saved-theme="light"] {
-  color-scheme: light;
-}
-
+/* İkon Değişim Mantığı */
 :root[saved-theme="dark"] .darkmode {
   & > .dayIcon {
     display: none;
   }
   & > .nightIcon {
     display: inline;
+    fill: var(--secondary); /* Gece modunda ikon altın rengi olsun */
   }
 }
 
 :root .darkmode {
   & > .dayIcon {
     display: inline;
+    fill: var(--secondary); /* Gündüz modunda ikon mühür kırmızısı olsun */
   }
   & > .nightIcon {
     display: none;
