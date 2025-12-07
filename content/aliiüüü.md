@@ -1,1 +1,1 @@
-slmm
+slmm ornegın su an guncellenıyor mu
